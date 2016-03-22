@@ -1,1 +1,1 @@
-javascript:(function () {var script=document.createElement('script');script.src='https://codeandcake.github.io/mintdbox/mintdbox.js';document.body.appendChild(script);}())
+javascript:(function () {var script=document.createElement('script');script.src='https://matteomenapace.github.io/mintdbox/mintdbox.js';document.body.appendChild(script);}())
