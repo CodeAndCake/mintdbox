@@ -109,23 +109,30 @@ function makeSubscriptionCSV(subscription)
 
   csvProperties.forEach(function(property)
   {
-    subscriptionString += resolve(subscription, subscriptionPropertiesMap[property]) + ','
+    var path = subscriptionPropertiesMap[property],
+        value = getPropertyByPath(subscription, path)
+    subscriptionString += value + ','
   })
 
   return subscriptionString
 }
 
-// from http://stackoverflow.com/a/24221895/2928562
-function resolve(object, path)
+// adapted from from http://stackoverflow.com/a/24221895/2928562
+// path is a string representing the pah to the property we're looking for, in dot notation, eg: 'customer.name'
+function getPropertyByPath(object, path)
 {
-  path = path.split('.').reverse()  
-  var current = object
-  while(path.length) 
+  // split the path into components
+  path = path.split('.')  
+  // clone the object
+  var clone = object
+  // loop through the path, until we get something
+  while(path.length > 0) 
   {
-    if (typeof current !== 'object') return undefined
-    current = current[path.pop()]
+    if (typeof clone !== 'object') return undefined
+    clone = clone[path.shift()]
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift
   }
-  return current
+  return clone
 }
 
 // ...and start it!
