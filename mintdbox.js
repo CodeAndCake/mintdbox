@@ -1,5 +1,3 @@
-// TODO we may not need the first line of csv if we're using a spreadsheet
-
 // define some variables
 
 var subscriptionPropertiesMap = 
@@ -53,7 +51,8 @@ var subscriptionPropertiesMap =
       'nails'               : 'productsInterestedIn.Nails',
       'tools & accessories' : 'productsInterestedIn.ToolsAccessories'
     },
-    csv = Object.keys(subscriptionPropertiesMap).join(), 
+    // csv = Object.keys(subscriptionPropertiesMap).join(),
+    csv = '', 
     apiRoot = 'https://mintdbox.com',
     subscriptionsEndPoint = '/v1/store/api/subscriptions/',
     subscriptionsUrl = apiRoot + subscriptionsEndPoint,
@@ -155,7 +154,7 @@ function makeCSV()
   for (id in subscriptions) 
   {
     var subscription = subscriptions[id]
-    csv += newLine + makeSubscriptionCSV(subscription)
+    csv += makeSubscriptionCSV(subscription) + newLine
   } 
   console.log(csv)
 
