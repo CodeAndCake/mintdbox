@@ -14,4 +14,20 @@ body
   border: 0;
   border-radius: 3px;
   text-decoration: none;
+  display: block;
+}  
+
+.bookmark .label 
+{
+  position: relative;
+  color: transparent;
+}    
+
+.bookmark .label:after 
+{
+  content: "Drag and drop me in your bookmarks bar";
+  position: absolute;
+  left: 1rem;
+  color: white;
+  white-space: nowrap;
 }  
