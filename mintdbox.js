@@ -1,62 +1,57 @@
 // TODO we may not need the first line of csv if we're using a spreadsheet
 
-// TODO add all properties to subscriptionPropertiesMap
-  /*
-    customer
-    email 
-    birthday
-    skinTone
-      Fair
-      Light
-      Medium
-      Olive
-      Deep
-      Dark
-    skinConcerns
-      Normal
-      Combination
-      Dry
-      Blemished
-    skinCondition
-      Sensitive
-      Acne
-      DarkSpots
-      Dryness
-      EnlargedPores
-      Redness
-    hairType
-      Curly
-      Straight
-      Fine
-      Thick
-      Coarse
-    hairCondition
-      Coloured
-      Dry
-      Oily
-      Relaxed
-      Permed
-    productsInterestedIn
-      Skincare
-      ToolsAccessories
-      etc.  
-  */
-
 // define some variables
 
 var subscriptionPropertiesMap = 
     {
-      // what will appear on the spreadsheet : where to find that property in the the subscription data object 
-      'customer'      : 'customer.name',
-      'email'         : 'customer.email', 
-      'birthday'      : 'cart.birthday',
-      'fair skin'     : 'skinTone.Fair',
-      'light skin'    : 'skinTone.Light',
-      'medium skin'   : 'skinTone.Medium',
-      'olive skin'    : 'skinTone.Olive',
-      'deep skin'     : 'skinTone.Deep',
-      'dark skin'     : 'skinTone.Dark',
-      // etc.
+      // spreadsheet        : subscription data object 
+      'customer'            : 'customer.name',
+      'email'               : 'customer.email', 
+      'birthday'            : 'cart.birthday',
+
+      'fair skin'           : 'skinTone.Fair',
+      'light skin'          : 'skinTone.Light',
+      'medium skin'         : 'skinTone.Medium',
+      'olive skin'          : 'skinTone.Olive',
+      'deep skin'           : 'skinTone.Deep',
+      'dark skin'           : 'skinTone.Dark',
+
+      'normal skin'         : 'skinConcerns.Normal',
+      'combination skin'    : 'skinConcerns.Combination',
+      'dry skin'            : 'skinConcerns.Dry',
+      'oily skin'           : 'skinConcerns.Oily',
+      'blemished skin'      : 'skinConcerns.Blemished',
+
+      'sensitive skin'      : 'skinCondition.Sensitive',
+      'acne'                : 'skinCondition.Acne',
+      'dark spots'          : 'skinCondition.DarkSpots',
+      'dehydrated skin'     : 'skinCondition.Dryness',
+      'enlarged pores'      : 'skinCondition.EnlargedPores',
+      
+      'curly hair'          : 'hairType.Curly',
+      'straight hair'       : 'hairType.Straight',
+      'fine hair'           : 'hairType.Fine',
+      'thick hair'          : 'hairType.Thick',
+      'coarse hair'         : 'hairType.Coarse',
+
+      'coloures hair'       : 'hairCondition.Coloured',
+      'dry hair'            : 'hairCondition.Dry',
+      'oily hair'           : 'hairCondition.Oily',
+      'relaxed hair'        : 'hairCondition.Relaxed',
+      'permed hair'         : 'hairCondition.Permed',
+
+      '0-£50'               : 'spend.0-50',
+      '£50-£100'            : 'spend.50-100',
+      '£100-£150'           : 'spend.100-150',
+      '£150- £200'          : 'spend.150-200',
+      '£200+'               : 'spend.200plus',
+
+      'skincare'            : 'productsInterestedIn.Skincare',
+      'bath & body'         : 'productsInterestedIn.BathBody',
+      'make up'             : 'productsInterestedIn.Makeup',
+      'haircare'            : 'productsInterestedIn.Haircare',
+      'nails'               : 'productsInterestedIn.Nails',
+      'tools & accessories' : 'productsInterestedIn.ToolsAccessories'
     },
     csv = Object.keys(subscriptionPropertiesMap).join(), 
     apiRoot = 'https://mintdbox.com',
