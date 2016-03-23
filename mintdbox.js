@@ -34,7 +34,7 @@ var subscriptionPropertiesMap =
       'thick hair'          : 'hairType.Thick',
       'coarse hair'         : 'hairType.Coarse',
 
-      'coloures hair'       : 'hairCondition.Coloured',
+      'coloured hair'       : 'hairCondition.Coloured',
       'dry hair'            : 'hairCondition.Dry',
       'oily hair'           : 'hairCondition.Oily',
       'relaxed hair'        : 'hairCondition.Relaxed',
