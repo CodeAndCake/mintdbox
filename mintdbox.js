@@ -65,7 +65,8 @@ var subscriptionPropertiesMap =
     subscriptions = {},
     subscriptionsCounter = 0,
     subscriptionsTotal = 0,
-    newLine = '\n'
+    newLine = '\n',
+    blob, downloadUrl
 
 // define some functions...
 
@@ -162,6 +163,11 @@ function makeCSV()
     csv += newLine + makeSubscriptionCSV(subscription)
   } 
   console.log(csv)
+
+  // make a blob, fill it with csv stuff, then download it as a file
+  blob = new Blob([csv], {type: 'text/csv;charset=utf-8;'})
+  downloadUrl = URL.createObjectURL(blob)
+  location.replace(downloadUrl)
 }
 
 function makeSubscriptionCSV(subscription)
