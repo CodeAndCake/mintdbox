@@ -1,18 +1,71 @@
+// TODO we may not need the first line of csv if we're using a spreadsheet
+
+// TODO add all properties to subscriptionPropertiesMap
+  /*
+    customer
+    email 
+    birthday
+    skinTone
+      Fair
+      Light
+      Medium
+      Olive
+      Deep
+      Dark
+    skinConcerns
+      Normal
+      Combination
+      Dry
+      Blemished
+    skinCondition
+      Sensitive
+      Acne
+      DarkSpots
+      Dryness
+      EnlargedPores
+      Redness
+    hairType
+      Curly
+      Straight
+      Fine
+      Thick
+      Coarse
+    hairCondition
+      Coloured
+      Dry
+      Oily
+      Relaxed
+      Permed
+    productsInterestedIn
+      Skincare
+      ToolsAccessories
+      etc.  
+  */
+
 // define some variables
 
-var apiRoot = 'https://mintdbox.com',
+var subscriptionPropertiesMap = 
+    {
+      // what will appear on the spreadsheet : where to find that property in the the subscription data object 
+      'customer'      : 'customer.name',
+      'email'         : 'customer.email', 
+      'birthday'      : 'cart.birthday',
+      'fair skin'     : 'skinTone.Fair',
+      'light skin'    : 'skinTone.Light',
+      'medium skin'   : 'skinTone.Medium',
+      'olive skin'    : 'skinTone.Olive',
+      'deep skin'     : 'skinTone.Deep',
+      'dark skin'     : 'skinTone.Dark',
+      // etc.
+    },
+    csv = Object.keys(subscriptionPropertiesMap).join(), 
+    apiRoot = 'https://mintdbox.com',
     subscriptionsEndPoint = '/v1/store/api/subscriptions/',
     subscriptionsUrl = apiRoot + subscriptionsEndPoint,
     subscriptions = {},
     subscriptionsCounter = 0,
     subscriptionsTotal = 0,
-    newLine = '\n',
-    subscriptionPropertiesMap = 
-    { 
-      'customer': 'customer.name',
-      'email': 'customer.email', 
-    },
-    csv = Object.keys(subscriptionPropertiesMap).join()
+    newLine = '\n'
 
 // define some functions...
 
@@ -111,6 +164,10 @@ function makeSubscriptionCSV(subscription)
   {
     var path = subscriptionPropertiesMap[property],
         value = getPropertyByPath(subscription, path)
+
+    if (value == undefined) value = ''
+    if (value == 'on') value = 'yes'
+    value = value.trim() // trim white space at the beginning and end
     subscriptionString += value + ','
   })
 
@@ -136,43 +193,4 @@ function getPropertyByPath(object, path)
 }
 
 // ...and start it!
-getNextSubscriptionsBatch(subscriptionsUrl) 
-
-
-
-  /*
-    customer
-    email 
-    birthday
-    skinTone
-      Fair
-      Light
-      Medium
-      Olive
-      Deep
-      Dark
-    skinConcerns
-      Normal
-      Combination
-      Dry
-      Blemished
-    skinCondition
-      Sensitive
-      Acne
-      DarkSpots
-      Dryness
-      EnlargedPores
-      Redness
-    hairType
-      Curly
-      Straight
-      Fine
-      Thick
-      Coarse
-    hairCondition
-      Coloured
-      Dry
-      Oily
-      Relaxed
-      Permed
-  */
+getNextSubscriptionsBatch(subscriptionsUrl)
