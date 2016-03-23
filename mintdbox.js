@@ -71,9 +71,11 @@ var subscriptionPropertiesMap =
 
 function getNextSubscriptionsBatch(url)
 {
-  console.log('get subscriptions ' + url)
-  $.get(url, function(data)
-  {
+  if (subscriptionsTotal == 0) console.log('Getting subscriptions... ')
+  else logCurrentProgress()  
+  $.get(url)
+  .done(function(data)
+  { 
     // console.log('\t success ', data)
     subscriptionsTotal = data.count
 
@@ -82,6 +84,7 @@ function getNextSubscriptionsBatch(url)
     {
       data.results.forEach(function (result)
       {
+        subscriptionsCounter ++
         subscriptions[result.id] = result
       })
     } 
@@ -94,15 +97,23 @@ function getNextSubscriptionsBatch(url)
     } 
     else gotAllSubscriptions()
   })
+  .fail(function(error) 
+  {
+    console.error(error)
+  })
 } 
 
 function gotAllSubscriptions()
 {
+  logCurrentProgress() 
+  console.log('Got all subscriptions!')
+  subscriptionsCounter = 0 // reset
   getSubscriptionsMetadata()
 }
 
 function getSubscriptionsMetadata()
 {
+  console.log('Getting surveys data for each subscription...')
   // loop through all subscriptions
   for (id in subscriptions) 
   {
@@ -110,11 +121,11 @@ function getSubscriptionsMetadata()
         url = apiRoot + subscription.url + 'metadata/'
 
     // get the subscription metadata
-    console.log('get subscription metadata ' + url)
+    // console.log('get subscription metadata ' + url)
     $.get(url)
     .done(function(metadata)
     { 
-      console.log(metadata.data) 
+      // console.log(metadata.data) 
       var subscription = subscriptions[metadata.subscription_id]
       // add each metadata property to the subscription object
       for (property in metadata.data)
@@ -129,23 +140,21 @@ function getSubscriptionsMetadata()
     .always(function() 
     {
       subscriptionsCounter ++
-      if (subscriptionsCounter >= subscriptionsTotal)
-      {
-        // console.log('done, now make the CSV!')
-        gotAllMetadata()
-      } 
+      logCurrentProgress()
+      if (subscriptionsCounter >= subscriptionsTotal) gotAllMetadata()
     })
   }
 }
 
 function gotAllMetadata()
 {
+  console.log('Got all surveys!')
   makeCSV()
 }
 
 function makeCSV()
 {
-  console.log('makeCSV')
+  console.log('Building CSV...')
   // loop through all subscriptions
   for (id in subscriptions) 
   {
@@ -172,6 +181,11 @@ function makeSubscriptionCSV(subscription)
   })
 
   return subscriptionString
+}
+
+function logCurrentProgress()
+{
+  console.log('\t ' + subscriptionsCounter + '/' + subscriptionsTotal) 
 }
 
 // adapted from from http://stackoverflow.com/a/24221895/2928562
