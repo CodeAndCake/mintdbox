@@ -1,0 +1,17 @@
+body
+{
+  color: #282828;
+  font-family: 'PT Serif', sans-serif;
+}
+
+.bookmark
+{
+  cursor: pointer;
+  background: #9CD6CA;
+  box-shadow: 0 2px 0 #7FCEBD;
+  color: #fff;
+  padding: .5rem .75rem;
+  border: 0;
+  border-radius: 3px;
+  text-decoration: none;
+}  
