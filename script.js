@@ -49,7 +49,15 @@ var subscriptionPropertiesMap =
       'make up'             : 'productsInterestedIn.Makeup',
       'haircare'            : 'productsInterestedIn.Haircare',
       'nails'               : 'productsInterestedIn.Nails',
-      'tools & accessories' : 'productsInterestedIn.ToolsAccessories'
+      'tools & accessories' : 'productsInterestedIn.ToolsAccessories',
+      
+      'blog post'           : 'hearAbout.blogPost',
+      'Facebook'            : 'hearAbout.Facebook',
+      'Instagram'           : 'hearAbout.Instagram',
+      'Twitter'             : 'hearAbout.Twitter',
+      'Magazine'            : 'hearAbout.Magazine',
+      'Competition/Promotions'  : 'hearAbout.CompetitionPromotions'
+      
     },
     // csv = Object.keys(subscriptionPropertiesMap).join(),
     csv = '', 
